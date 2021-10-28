@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Converter</title>
+      <style>
+ul.bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: lightskyblue;
+}
+
+li.tab {
+  float: left;
+}
+
+li.tab a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 15px 15px;
+  text-decoration: none;
+}
+
+li.tab a:hover {
+  background-color: #111;
+}
+
+ul.menu{
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+a.link{
+  display: block;
+  background: #00A9D4;
+  color: #fff;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  width: 80px;
+  border-radius: 5px
+}
+
+div.home{
+  font-size: 30px;
+}
+
+</style>
+    <!-- Bootstrap CSS file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<ul class = "bar">
+  <li class = "tab"><a href="{{ url_for('numeral') }}">Numeral</a></li>
+  <li class = "tab"><a href="{{ url_for('integer') }}">Integer</a></li>
+</ul>
+
+    <h1>Random ID Generator</h1>
+    <form method="POST">
+    <p>How Many?:</p><br> 
+    <input type="number" step="1" name = "num"> 
+    <input type = "submit"> 
+    </form>
+
+    <!-- Bootstrap JS file Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
