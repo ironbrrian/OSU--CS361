@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect
 import os
 import random
 
+os.system('python TransService.py')
+
 from flask.helpers import url_for
 
 # Configuration
@@ -9,6 +11,48 @@ from flask.helpers import url_for
 app = Flask(__name__)
 
 # Routes 
+def text2int(textnum, numwords={}):
+    if not numwords:
+      units = [
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen",
+      ]
+
+      tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+
+      scales = ["hundred", "thousand", "million", "billion", "trillion"]
+
+      numwords["and"] = (1, 0)
+      for idx, word in enumerate(units):    numwords[word] = (1, idx)
+      for idx, word in enumerate(tens):     numwords[word] = (1, idx * 10)
+      for idx, word in enumerate(scales):   numwords[word] = (10 ** (idx * 3 or 2), 0)
+
+    current = result = 0
+    for word in textnum.split():
+        if word not in numwords:
+          raise Exception("Illegal word: " + word)
+
+        scale, increment = numwords[word]
+        current = current * scale + increment
+        if scale > 100:
+            result += current
+            current = 0
+
+    return result + current
+
+
+response_file = "response.txt"
+
+with open(response_file) as f:
+    contents = f.readlines()
+    # print(contents)
+
+    for ele in contents:
+        print("Converted Number:",text2int(ele))
+
+
+
 def randomID(amount):
     amount = int(amount)
     for i in range(amount):
@@ -110,7 +154,7 @@ def user(usr):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 1701)) 
+    port = int(os.environ.get('PORT', 1604)) 
     #                                 ^^^^
     #              You can replace this number with any valid port
     
